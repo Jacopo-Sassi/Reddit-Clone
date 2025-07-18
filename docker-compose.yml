@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: reddit_postgres
+    environment:
+      POSTGRES_DB: redditdb
+      POSTGRES_USER: reddituser
+      POSTGRES_PASSWORD: redditpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - reddit_network
+
+networks:
+  reddit_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
