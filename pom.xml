@@ -59,6 +59,11 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.1.0</version> <!-- Per documentazione API -->
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,6 +71,30 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.6.0</version> <!-- Verifica la versione più recente -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/api-spec.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>org.it.jacopo.RedditApp.api</apiPackage>
+                            <modelPackage>org.it.jacopo.RedditApp.dto</modelPackage>
+                            <modelNameSuffix>Dto</modelNameSuffix> <!-- Es: PostDto -->
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly> <!-- Solo API, no implementazioni -->
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <openApiNullable>false</openApiNullable>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
