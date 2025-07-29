@@ -48,3 +48,11 @@ CREATE TABLE votes (
                        FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
                        UNIQUE (user_id, post_id)  -- Un voto per utente/post
 );
+
+-- Relazioni tra le tabelle
+-- users (1) → (N) posts
+--users (1) → (N) comments
+--users (1) → (N) votes
+--ubreddits (1) → (N) posts
+--posts (1) → (N) comments
+-- comments (1) → (N) comments (gerarchia)
